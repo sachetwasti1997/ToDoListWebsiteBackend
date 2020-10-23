@@ -1,0 +1,8 @@
+ToDoListServiceConfiguration.class
+ToDoListApplication.class
+resource/TaskResource.class
+model/ImmutableTasks$Builder.class
+model/ImmutableTasks$Json.class
+model/ImmutableTasks$1.class
+model/Tasks.class
+model/ImmutableTasks.class
