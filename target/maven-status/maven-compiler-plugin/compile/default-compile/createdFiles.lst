@@ -5,4 +5,5 @@ model/ImmutableTasks$Builder.class
 model/ImmutableTasks$Json.class
 model/ImmutableTasks$1.class
 model/Tasks.class
+ToDoListServiceModel.class
 model/ImmutableTasks.class

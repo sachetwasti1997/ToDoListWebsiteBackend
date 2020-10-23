@@ -25,6 +25,7 @@ public class ToDoListApplication extends Application<ToDoListServiceConfiguratio
         Injector injector = Guice.createInjector(new ToDoListServiceModel(toDoListServiceConfiguration));
         environment.jersey().register(injector.getInstance(TaskResource.class));
         environment.jersey().register(MultiPartFeature.class);
+        LOGGER.info("All resources added for todolistapplication");
     }
 
     public static void main(String [] args) throws Exception{
