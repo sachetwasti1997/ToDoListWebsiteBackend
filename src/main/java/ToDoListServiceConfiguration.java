@@ -7,10 +7,6 @@ import javax.validation.constraints.NotNull;
 
 public class ToDoListServiceConfiguration extends Configuration {
 
-    @NotNull
-    @Valid
-    private DataSourceFactory database = new DataSourceFactory();
-
     @Valid
     @NotNull
     @JsonProperty
@@ -23,10 +19,5 @@ public class ToDoListServiceConfiguration extends Configuration {
     public String getApplicationName(){return applicationName;}
 
     public String getEnvironmentName(){return environmentName;}
-
-    @JsonProperty
-    public DataSourceFactory getDataSourceFactory(){
-        return database;
-    }
 
 }
