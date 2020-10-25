@@ -28,15 +28,15 @@ public class TaskService {
     }
 
     public List<Task> getTasks() throws SQLException {
-        return taskDAOimplementation.getTasks();
+        return taskDAOimplementation.getTasks(GET_ALL_QUERY);
     }
 
     public Task getTaskById(int id) throws SQLException{
-        return taskDAOimplementation.getTaskById(id);
+        return taskDAOimplementation.getTaskById(id, GET_QUERY);
     }
 
     public Task addTask(Task task) throws SQLException{
-        taskDAOimplementation.add(task);
+        taskDAOimplementation.add(task, INSERT_QUERY);
         return taskDAOimplementation.getTaskByName(GET_TASK_BY_NAME, task.getTask_name()).get(0);
     }
 
@@ -45,7 +45,7 @@ public class TaskService {
             LOGGER.warn("Cannot find task with given id "+id);
             return null;
         }
-        return taskDAOimplementation.deleteTaskById(id);
+        return taskDAOimplementation.deleteTaskById(id, DELETE_QUERY);
     }
 
     public Task updateTaskById(int id, Task task) throws SQLException{
@@ -53,7 +53,7 @@ public class TaskService {
             LOGGER.warn("Cannot find task with given id "+id);
             return null;
         }
-        taskDAOimplementation.updateTask(task);
+        taskDAOimplementation.updateTask(task, UPDATE_TASK_PRIORITY_NAME);
         return getTaskById(id);
     }
 
