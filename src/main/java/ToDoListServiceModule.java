@@ -6,10 +6,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ToDoListServiceModel extends AbstractModule {
+public class ToDoListServiceModule extends AbstractModule {
     private final ToDoListServiceConfiguration configuration;
 
-    public ToDoListServiceModel(ToDoListServiceConfiguration configuration){
+    public ToDoListServiceModule(ToDoListServiceConfiguration configuration){
         this.configuration = configuration;
     }
 

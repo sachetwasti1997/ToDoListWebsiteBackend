@@ -70,6 +70,7 @@ public class TaskDAOimplementation implements TasksDAO {
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, task.getTask_name());
         ps.setInt(2, task.getTask_priority());
+        ps.setString(3, task.getTask_description());
         ps.executeUpdate();
         return task;
     }
@@ -93,6 +94,7 @@ public class TaskDAOimplementation implements TasksDAO {
             Task task = new Task();
             task.setTask_id(rs.getInt("taskid"));
             task.setTask_name(rs.getString("taskname"));
+            task.setTask_description(rs.getString("taskdescription"));
             task.setTask_priority(rs.getInt("priority"));
             taskList.add(task);
         }

@@ -35,14 +35,17 @@ public final class ImmutableTasks implements Tasks {
   private final @Nullable Integer taskId;
   private final String taskName;
   private final Integer priority;
+  private final String taskDescription;
 
   private ImmutableTasks(
       @Nullable Integer taskId,
       String taskName,
-      Integer priority) {
+      Integer priority,
+      String taskDescription) {
     this.taskId = taskId;
     this.taskName = taskName;
     this.priority = priority;
+    this.taskDescription = taskDescription;
   }
 
   /**
@@ -73,6 +76,15 @@ public final class ImmutableTasks implements Tasks {
   }
 
   /**
+   * @return
+   */
+  @JsonProperty("taskDescription")
+  @Override
+  public String getTaskDescription() {
+    return taskDescription;
+  }
+
+  /**
    * Copy the current immutable object by setting a value for the {@link Tasks#getTaskId() taskId} attribute.
    * An equals check used to prevent copying of the same value by returning {@code this}.
    * @param value A new value for taskId (can be {@code null})
@@ -80,7 +92,7 @@ public final class ImmutableTasks implements Tasks {
    */
   public final ImmutableTasks withTaskId(@Nullable Integer value) {
     if (Objects.equals(this.taskId, value)) return this;
-    return new ImmutableTasks(value, this.taskName, this.priority);
+    return new ImmutableTasks(value, this.taskName, this.priority, this.taskDescription);
   }
 
   /**
@@ -92,7 +104,7 @@ public final class ImmutableTasks implements Tasks {
   public final ImmutableTasks withTaskName(String value) {
     String newValue = Objects.requireNonNull(value, "taskName");
     if (this.taskName.equals(newValue)) return this;
-    return new ImmutableTasks(this.taskId, newValue, this.priority);
+    return new ImmutableTasks(this.taskId, newValue, this.priority, this.taskDescription);
   }
 
   /**
@@ -104,7 +116,19 @@ public final class ImmutableTasks implements Tasks {
   public final ImmutableTasks withPriority(Integer value) {
     Integer newValue = Objects.requireNonNull(value, "priority");
     if (this.priority.equals(newValue)) return this;
-    return new ImmutableTasks(this.taskId, this.taskName, newValue);
+    return new ImmutableTasks(this.taskId, this.taskName, newValue, this.taskDescription);
+  }
+
+  /**
+   * Copy the current immutable object by setting a value for the {@link Tasks#getTaskDescription() taskDescription} attribute.
+   * An equals check used to prevent copying of the same value by returning {@code this}.
+   * @param value A new value for taskDescription
+   * @return A modified copy of the {@code this} object
+   */
+  public final ImmutableTasks withTaskDescription(String value) {
+    String newValue = Objects.requireNonNull(value, "taskDescription");
+    if (this.taskDescription.equals(newValue)) return this;
+    return new ImmutableTasks(this.taskId, this.taskName, this.priority, newValue);
   }
 
   /**
@@ -121,11 +145,12 @@ public final class ImmutableTasks implements Tasks {
   private boolean equalTo(ImmutableTasks another) {
     return Objects.equals(taskId, another.taskId)
         && taskName.equals(another.taskName)
-        && priority.equals(another.priority);
+        && priority.equals(another.priority)
+        && taskDescription.equals(another.taskDescription);
   }
 
   /**
-   * Computes a hash code from attributes: {@code taskId}, {@code taskName}, {@code priority}.
+   * Computes a hash code from attributes: {@code taskId}, {@code taskName}, {@code priority}, {@code taskDescription}.
    * @return hashCode value
    */
   @Override
@@ -134,6 +159,7 @@ public final class ImmutableTasks implements Tasks {
     h += (h << 5) + Objects.hashCode(taskId);
     h += (h << 5) + taskName.hashCode();
     h += (h << 5) + priority.hashCode();
+    h += (h << 5) + taskDescription.hashCode();
     return h;
   }
 
@@ -148,6 +174,7 @@ public final class ImmutableTasks implements Tasks {
         .add("taskId", taskId)
         .add("taskName", taskName)
         .add("priority", priority)
+        .add("taskDescription", taskDescription)
         .toString();
   }
 
@@ -164,6 +191,7 @@ public final class ImmutableTasks implements Tasks {
     @Nullable Integer taskId;
     @Nullable String taskName;
     @Nullable Integer priority;
+    @Nullable String taskDescription;
     @JsonProperty("taskId")
     public void setTaskId(@Nullable Integer taskId) {
       this.taskId = taskId;
@@ -176,12 +204,18 @@ public final class ImmutableTasks implements Tasks {
     public void setPriority(Integer priority) {
       this.priority = priority;
     }
+    @JsonProperty("taskDescription")
+    public void setTaskDescription(String taskDescription) {
+      this.taskDescription = taskDescription;
+    }
     @Override
     public Integer getTaskId() { throw new UnsupportedOperationException(); }
     @Override
     public String getTaskName() { throw new UnsupportedOperationException(); }
     @Override
     public Integer getPriority() { throw new UnsupportedOperationException(); }
+    @Override
+    public String getTaskDescription() { throw new UnsupportedOperationException(); }
   }
 
   /**
@@ -201,6 +235,9 @@ public final class ImmutableTasks implements Tasks {
     }
     if (json.priority != null) {
       builder.priority(json.priority);
+    }
+    if (json.taskDescription != null) {
+      builder.taskDescription(json.taskDescription);
     }
     return builder.build();
   }
@@ -241,11 +278,13 @@ public final class ImmutableTasks implements Tasks {
   public static final class Builder {
     private static final long INIT_BIT_TASK_NAME = 0x1L;
     private static final long INIT_BIT_PRIORITY = 0x2L;
-    private long initBits = 0x3L;
+    private static final long INIT_BIT_TASK_DESCRIPTION = 0x4L;
+    private long initBits = 0x7L;
 
     private @Nullable Integer taskId;
     private @Nullable String taskName;
     private @Nullable Integer priority;
+    private @Nullable String taskDescription;
 
     private Builder() {
     }
@@ -266,6 +305,7 @@ public final class ImmutableTasks implements Tasks {
       }
       taskName(instance.getTaskName());
       priority(instance.getPriority());
+      taskDescription(instance.getTaskDescription());
       return this;
     }
 
@@ -308,6 +348,19 @@ public final class ImmutableTasks implements Tasks {
     }
 
     /**
+     * Initializes the value for the {@link Tasks#getTaskDescription() taskDescription} attribute.
+     * @param taskDescription The value for taskDescription 
+     * @return {@code this} builder for use in a chained invocation
+     */
+    @CanIgnoreReturnValue 
+    @JsonProperty("taskDescription")
+    public final Builder taskDescription(String taskDescription) {
+      this.taskDescription = Objects.requireNonNull(taskDescription, "taskDescription");
+      initBits &= ~INIT_BIT_TASK_DESCRIPTION;
+      return this;
+    }
+
+    /**
      * Builds a new {@link ImmutableTasks ImmutableTasks}.
      * @return An immutable instance of Tasks
      * @throws java.lang.IllegalStateException if any required attributes are missing
@@ -316,13 +369,14 @@ public final class ImmutableTasks implements Tasks {
       if (initBits != 0) {
         throw new IllegalStateException(formatRequiredAttributesMessage());
       }
-      return new ImmutableTasks(taskId, taskName, priority);
+      return new ImmutableTasks(taskId, taskName, priority, taskDescription);
     }
 
     private String formatRequiredAttributesMessage() {
       List<String> attributes = new ArrayList<>();
       if ((initBits & INIT_BIT_TASK_NAME) != 0) attributes.add("taskName");
       if ((initBits & INIT_BIT_PRIORITY) != 0) attributes.add("priority");
+      if ((initBits & INIT_BIT_TASK_DESCRIPTION) != 0) attributes.add("taskDescription");
       return "Cannot build Tasks, some of required attributes are not set " + attributes;
     }
   }

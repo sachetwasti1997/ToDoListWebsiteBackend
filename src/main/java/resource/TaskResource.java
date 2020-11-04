@@ -53,6 +53,9 @@ public class TaskResource {
     @POST
     public Response addTask(Task task){
         try {
+            if(task.getTask_name().equals("") || task.getTask_priority() == 0){
+                return Response.status(Response.Status.BAD_REQUEST).entity("Cannot build tasks as the fields task name and task priority is empty").build();
+            }
             Task taskAdded = taskService.addTask(task);
             return Response.ok().entity(taskAdded).build();
         }catch (SQLException e){

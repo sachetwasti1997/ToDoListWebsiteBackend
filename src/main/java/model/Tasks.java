@@ -36,4 +36,9 @@ public interface Tasks {
     @NotNull
     Integer getPriority();
 
+    /**
+     * @return
+     */
+    String getTaskDescription();
+
 }
