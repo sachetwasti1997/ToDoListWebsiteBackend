@@ -22,7 +22,9 @@ none
 +currentpage: The current page number like 1, 2, 3, or 4.
 ## Success Response:
 +Code: 200
-+Content: ```{
++Content: 
+```yaml
+{
     "employees": [
         {
             "skills": [
@@ -100,4 +102,4 @@ none
         }
     ],
     "maxEmployees": 5
-}```
+}
