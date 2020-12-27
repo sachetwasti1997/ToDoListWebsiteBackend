@@ -18,11 +18,11 @@ none
 ## Data Params:
 none
 ## Query Params:
-*pagesize: The total number of items that a page shows.
-*currentpage: The current page number like 1, 2, 3, or 4.
++pagesize: The total number of items that a page shows.
++currentpage: The current page number like 1, 2, 3, or 4.
 ## Success Response:
-*Code: 200
-*Content: ```{
++Code: 200
++Content: ```{
     "employees": [
         {
             "skills": [
