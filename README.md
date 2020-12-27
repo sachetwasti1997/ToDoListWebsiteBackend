@@ -23,7 +23,7 @@ none
 ## Success Response:
 + Code: 200
 + Content: 
-```yaml
+```json
 {
     "employees": [
         {
@@ -102,4 +102,6 @@ none
         }
     ],
     "maxEmployees": 5
-}
+}```
+
+# SHOW EMPLOYEES BY ID
